@@ -1,13 +1,10 @@
 
 const isWeekend = (inputDate): boolean => {
   const day = inputDate.getDay();
-  if (day === 0 || day === 6) {
-    return true;
-  }
-  return false;
+  return (day === 0 || day === 6);
 };
 
-export default { isWeekend };
+// export default { isWeekend };
 
 // import DateUtils from '.'
 // const today = new Date();
