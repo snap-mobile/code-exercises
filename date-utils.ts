@@ -1,14 +1,11 @@
 
-const isWeekend = (inputDate): boolean => {
-  const day = inputDate.getDay();
-  if (day === 0 || day === 6) {
-    return true;
-  }
-  return false;
+const isWeekend = function (inputDate) {
+  const day = inputDate.get();
+  return (day + 6) % 7 >= 5;
 };
 
-export default { isWeekend };
+// export default { isWeekend };
 
 // import DateUtils from '.'
-// const today = new Date();
-// console.log( DateUtils.isWeekend(today) );
+const today = new Date("2022-02-05");
+console.log(isWeekend(today));
