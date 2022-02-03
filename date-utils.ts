@@ -1,8 +1,5 @@
-
-const isWeekend = (inputDate): boolean => {
-  const day = inputDate.getDay();
-  return (day === 0 || day === 6); 
-};
+const isWeekend = (inputDate): boolean =>
+  inputDate.getDay() === 0 || inputDate.getDay() === 6;
 
 export default { isWeekend };
 
