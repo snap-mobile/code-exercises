@@ -1,10 +1,9 @@
 
 const isWeekend = (inputDate): boolean => {
+  const weekendDays = [0, 6];
   const day = inputDate.getDay();
-  if (day === 0 || day === 6) {
-    return true;
-  }
-  return false;
+
+  return weekendDays.includes(day);
 };
 
 export default { isWeekend };
