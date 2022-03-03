@@ -43,14 +43,33 @@ const fundraisers = [
   }
 ]
 
-const lastStatusFor = (statusLog: any): any => {
-  return statusLog.reduce((a: any, b: any) => {
+interface Status {
+  date: Date,
+  status: string
+}
+
+interface Fundraiser {
+  id: string,
+  name: string,
+  startDate: Date,
+  isActive: boolean,
+  teamSize: number,
+  statusLog: Status[]
+}
+
+interface Result{
+  fundId: string,
+  lastStatus: string
+}
+
+const lastStatusFor = (statusLog: Status[]): Status => {
+  return statusLog.reduce((a: Status, b: Status) => {
     return a.date > b.date ? a : b;
   });
 }
 
-const mostRecentStatuses = (fundraisers: any): any => {
-  return fundraisers.map((fundraiser: any): any => {
+const mostRecentStatuses = (fundraisers: Fundraiser[]): Result[] => {
+  return fundraisers.map((fundraiser: Fundraiser): Result => {
     return {
       fundId: fundraiser.id,
       lastStatus: lastStatusFor(fundraiser.statusLog).status,
