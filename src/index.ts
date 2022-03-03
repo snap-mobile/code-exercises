@@ -1,6 +1,8 @@
+type StatusType = "pending" | "active" | "closed";
+
 interface StatusLog {
     date: Date,
-    status: string
+    status: StatusType
 }
 
 interface Fundraiser {
@@ -14,7 +16,7 @@ interface Fundraiser {
 
 interface FundraiserStatus {
     fundId: string,
-    lastStatus: string
+    lastStatus: StatusType
 }
 
 const fundraisers: Array<Fundraiser> = [
