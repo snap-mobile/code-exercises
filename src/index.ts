@@ -1,4 +1,9 @@
-type StatusType = "pending" | "active" | "closed";
+enum Status {
+    Active = "active",
+    Inactive = "inactive"
+}
+
+type StatusType = keyof typeof Status;
 
 interface StatusLog {
     date: Date,
