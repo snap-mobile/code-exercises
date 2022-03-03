@@ -1,6 +1,8 @@
 enum Status {
-    Active = "active",
-    Inactive = "inactive"
+    active = "Active",
+    inactive = "Inactive",
+    pending = "pending",
+    closed = "Closed"
 }
 
 type StatusType = keyof typeof Status;
