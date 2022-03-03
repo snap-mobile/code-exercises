@@ -1,4 +1,4 @@
-interface Fundraiser {
+export interface Fundraiser {
   id: string;
   name: string;
   startDate: Date;
@@ -7,12 +7,12 @@ interface Fundraiser {
   statusLog: StatusLog[];
 }
 
-interface StatusLog {
+export interface StatusLog {
   date: Date;
   status: string;
 }
 
-interface MostRecentStatus {
+export interface MostRecentStatus {
   fundId: string;
   lastStatus: string;
 }
