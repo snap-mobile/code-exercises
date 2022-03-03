@@ -8,5 +8,9 @@
   },
   "repository": "git@github.com:snap-mobile/code-exercises.git",
   "author": "Joseph Ravenwolfe <joseph@ravenwolfe.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.6.0",
+    "typescript": "^4.6.2"
+  }
 }
