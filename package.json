@@ -4,7 +4,7 @@
   "description": "Code Exercises",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+    "start": "nodemon --watch './**/*.ts' src/index.ts"
   },
   "repository": "git@github.com:snap-mobile/code-exercises.git",
   "author": "Joseph Ravenwolfe <joseph@ravenwolfe.io>",
