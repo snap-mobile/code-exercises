@@ -14,7 +14,7 @@ interface StatusLogEntry {
   status: STATUS;
 }
 
-interface Status {
+interface FundraiserStatus {
   fundId: string;
   lastStatus: STATUS;
 }
@@ -70,8 +70,8 @@ const lastStatusFor = (statusLog: StatusLogEntry[]): StatusLogEntry => {
   });
 };
 
-const mostRecentStatuses = (fundraisers: Fundraiser[]): Status[] => {
-  return fundraisers.map((fundraiser: Fundraiser): Status => {
+const mostRecentStatuses = (fundraisers: Fundraiser[]): FundraiserStatus[] => {
+  return fundraisers.map((fundraiser: Fundraiser): FundraiserStatus => {
     return {
       fundId: fundraiser.id,
       lastStatus: lastStatusFor(fundraiser.statusLog).status,
