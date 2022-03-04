@@ -1,3 +1,17 @@
+interface Log {
+  date: Date,
+  status: string
+}
+
+interface Fundraiser {
+  id: string,
+  name: string,
+  startDate: Date,
+  isActive: Boolean,
+  teamSize: Number,
+  statusLog: Array<Log>,
+}
+
 const fundraisers = [
   {
     id: "1234",
