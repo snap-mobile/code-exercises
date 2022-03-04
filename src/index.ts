@@ -55,16 +55,16 @@ const fundraisers = [
         }
     ]
   }
-]
+];
 
-const lastStatusFor = (statusLog: any): any => {
-  return statusLog.reduce((a: any, b: any) => {
+const lastStatusFor = (statusLog: Array<Log>): Log => {
+  return statusLog.reduce((a: Log, b: Log): Log => {
     return a.date > b.date ? a : b;
   });
 }
 
-const mostRecentStatuses = (fundraisers: any): any => {
-  return fundraisers.map((fundraiser: any): any => {
+const mostRecentStatuses = (fundraisers: Array<Fundraiser>): Array<Fundraiser> => {
+  return fundraisers.map((fundraiser: Fundraiser): any => {
     return {
       fundId: fundraiser.id,
       lastStatus: lastStatusFor(fundraiser.statusLog).status,
