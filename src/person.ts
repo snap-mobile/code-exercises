@@ -1,9 +1,9 @@
-import AuthToken from './authToken';
-import DbModel from './dbModel';
-import Emailer from './emailer';
+import AuthToken, { generateToken } from "./authToken";
+import DbModel from "./dbModel";
+import Emailer from "./emailer";
 
-import type {Pipe, Next} from './pipe';
-import {pipe} from './pipe';
+import type { Pipe, Next } from "./pipe";
+import { pipe } from "./pipe";
 
 // export default class Person {
 //     id: string;
@@ -35,35 +35,43 @@ import {pipe} from './pipe';
 // }
 
 type Person = {
-    id: string;
-    firstName: string;
-    lastName: string;
-    dbRecord: any;
-    token: any;
+  id: string;
+  firstName: string;
+  lastName: string;
+  dbRecord: any;
+  token: any;
 };
 
-export const create = (id: string, firstName: string, lastName: string): Next<Person> => {
-    const person: Person = {id, firstName, lastName, dbRecord: null, token: null};
-    return pipe<Person>(person)();
+export const create = (
+  id: string,
+  firstName: string,
+  lastName: string
+): Next<Person> => {
+  const person: Person = {
+    id,
+    firstName,
+    lastName,
+    dbRecord: null,
+    token: null,
+  };
+  return pipe<Person>(person)();
 };
 
 export const authenticate: Pipe<Person> = (person) => {
-    const token = new AuthToken(person);
-    token.generate();
-
-    return {...person, token};
+  const token = generateToken();
+  return { ...person, token };
 };
 
 export const db = (config: string) => {
-    return (person: Person) => {
-        const dbRecord = new DbModel(config).where({id: person.id})
-        dbRecord.lastLogin = new Date;
+  return (person: Person) => {
+    const dbRecord = new DbModel(config).where({ id: person.id });
+    dbRecord.lastLogin = new Date();
 
-        return {...person, dbRecord}
-    }
+    return { ...person, dbRecord };
+  };
 };
 
 export const welcome = (body: string) => {
-    new Emailer(body).send();
-    return (person: Person) => person;
+  new Emailer(body).send();
+  return (person: Person) => person;
 };

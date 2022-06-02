@@ -1,4 +1,3 @@
-
 export default class AuthToken {
   person: any;
   token: string;
@@ -8,7 +7,11 @@ export default class AuthToken {
   }
 
   generate() {
-    this.token = 'abc123';
-    console.log(`Token generated at ${new Date()}`)
+    this.token = "abc123";
+    console.log(`Token generated at ${new Date()}`);
   }
+}
+
+export function generateToken() {
+  return "abc123";
 }
