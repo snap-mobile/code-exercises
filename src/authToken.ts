@@ -1,12 +1,6 @@
-
-export default class AuthToken {
-  person: any;
-
-  constructor(person: any) {
-    this.person = person;
-  }
-
-  generate() {
-    console.log(`Token generated at ${new Date()}`)
-  }
+import { Person } from './person';
+export default function authToken(_person: Person): string {
+  // irl we'd actually use `person` but whatever
+  console.log(`Token generated at ${new Date()}`);
+  return 'abc123';
 }

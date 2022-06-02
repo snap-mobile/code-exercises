@@ -1,33 +1,24 @@
+import authToken from './authToken';
+import { getPersonRecord, DbModel } from './dbModel';
 
-import AuthToken from './authToken';
-import DbModel from './dbModel';
-import Emailer from './emailer';
-
-export default class Person {
+export interface Person {
   id: string;
   firstName: string;
   lastName: string;
-  dbRecord: any;
-  token: any;
+  dbRecord?: DbModel;
+  token?: string;
+}
 
-  constructor(id: string, firstName: string, lastName: string) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.dbRecord = null;
-    this.token = null;
-  }
+export function newPerson(
+  id: string,
+  firstName: string,
+  lastName: string
+): Person {
+  return { id, firstName, lastName };
+}
 
-  authenticate() {
-    this.token = new AuthToken(this);
-    this.token.generate();
-    this.dbRecord = new DbModel("mysql://foobar").where({id: this.id});
-    this.welcome();
-    this.dbRecord.lastLogin = new Date;
-  }
-
-  welcome() {
-    // if (this.dbRecord?.lastLogin) { return };
-    new Emailer("Welcome new user!").send();
-  }
+export function authenticate(person: Person) {
+  const token = authToken(person);
+  const record = getPersonRecord(person.id);
+  return { ...person, token, record };
 }

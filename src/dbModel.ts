@@ -1,13 +1,13 @@
-
-export default class DbModel {
+export interface DbModel {
   config: string;
+  lastLogin?: Date;
+}
 
-  constructor(config: string) {
-    this.config = config;
-  }
+function dbModelFactory(): DbModel {
+  return { config: 'hi joseph' };
+}
 
-  where(params: any) {
-    console.log("Fetching from DB")
-    return { lastLogin: new Date }; // Mock DB Return
-  }
+export function getPersonRecord(_id: string): DbModel {
+  // irl we'd use id but whatever
+  return { config: dbModelFactory().config, lastLogin: new Date() };
 }
