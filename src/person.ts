@@ -1,9 +1,13 @@
-import AuthToken, { generateToken } from "./authToken";
-import DbModel from "./dbModel";
-import Emailer from "./emailer";
+// import AuthToken, { generateToken } from "./authToken";
+// import DbModel from "./dbModel";
+// import Emailer from "./emailer";
 
-import type { Pipe, Next } from "./pipe";
-import { pipe } from "./pipe";
+import type {Pipe, Next} from "./pipe";
+import {pipe} from "./pipe";
+
+import {generateToken} from "./authToken";
+import {connect} from "./dbModel";
+import {email} from "./emailer";
 
 // export default class Person {
 //     id: string;
@@ -35,43 +39,41 @@ import { pipe } from "./pipe";
 // }
 
 type Person = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  dbRecord: any;
-  token: any;
+    id: string;
+    firstName: string;
+    lastName: string;
+    dbRecord: any;
+    token: any;
 };
 
 export const create = (
-  id: string,
-  firstName: string,
-  lastName: string
+    id: string,
+    firstName: string,
+    lastName: string
 ): Next<Person> => {
-  const person: Person = {
-    id,
-    firstName,
-    lastName,
-    dbRecord: null,
-    token: null,
-  };
-  return pipe<Person>(person)();
+    const person: Person = {
+        id,
+        firstName,
+        lastName,
+        dbRecord: null,
+        token: null,
+    };
+    return pipe<Person>(person)();
 };
 
 export const authenticate: Pipe<Person> = (person) => {
-  const token = generateToken();
-  return { ...person, token };
+    const token = generateToken();
+    return {...person, token};
 };
 
 export const db = (config: string) => {
-  return (person: Person) => {
-    const dbRecord = new DbModel(config).where({ id: person.id });
-    dbRecord.lastLogin = new Date();
-
-    return { ...person, dbRecord };
-  };
+    return (person: Person) => {
+        const dbRecord = connect(config)({id: person.id});
+        return {...person, dbRecord};
+    };
 };
 
 export const welcome = (body: string) => {
-  new Emailer(body).send();
-  return (person: Person) => person;
+    email(body);
+    return (person: Person) => person;
 };
