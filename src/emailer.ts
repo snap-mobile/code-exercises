@@ -1,12 +1,3 @@
-
-export default class Emailer {
-  body: string;
-
-  constructor(body: string) {
-    this.body = body;
-  }
-
-  send() {
-    console.log(this.body)
-  }
+export const sendWelcomeEmail = (firstName: string) => {
+  console.log("Hey " + firstName + " , welcome to the cool team")
 }
