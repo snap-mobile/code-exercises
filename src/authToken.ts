@@ -1,4 +1,4 @@
-import { Person } from "./person"
+import { Person } from "./iPerson"
 
 export const generateToken = (person: Person): Person => {
   const token = "abc123";
