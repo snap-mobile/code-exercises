@@ -1,33 +1,26 @@
 
-import AuthToken from './authToken';
-import DbModel from './dbModel';
-import Emailer from './emailer';
+import { generateToken } from './authToken';
+import { dbWhere } from './dbModel';
+import { sendEmail } from './emailer';
 
-export default class Person {
+export type Person = {
   id: string;
   firstName: string;
   lastName: string;
-  dbRecord: any;
-  token: any;
+  token?: string;
+  lastLogin?: Date;
+}
 
-  constructor(id: string, firstName: string, lastName: string) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.dbRecord = null;
-    this.token = null;
+export const authenticate = (id: string, firstName: string, lastName: string): Person => {
+  const person = generateToken({ id, firstName, lastName });
+  const dbRecord = dbWhere("mysql://foobar", { id });
+
+  const result = {
+    ...person,
+    ...dbRecord
   }
 
-  authenticate() {
-    this.token = new AuthToken(this);
-    this.token.generate();
-    this.dbRecord = new DbModel("mysql://foobar").where({id: this.id});
-    this.welcome();
-    this.dbRecord.lastLogin = new Date;
-  }
+  sendEmail("Welcome new user!");
 
-  welcome() {
-    // if (this.dbRecord?.lastLogin) { return };
-    new Emailer("Welcome new user!").send();
-  }
+  return result;
 }

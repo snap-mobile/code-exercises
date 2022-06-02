@@ -1,12 +1,3 @@
-
-export default class Emailer {
-  body: string;
-
-  constructor(body: string) {
-    this.body = body;
-  }
-
-  send() {
-    console.log(this.body)
-  }
-}
+export const sendEmail = (body: string): void => {
+  console.log(body);
+};

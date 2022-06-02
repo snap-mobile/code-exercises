@@ -1,4 +1,4 @@
-import Person from './person';
+import { authenticate } from './person';
 
-let person = new Person("1234", "Cathy", "Holmes");
-person.authenticate();
+const person = authenticate("1234", "Cathy", "Holmes");
+console.log(person)
