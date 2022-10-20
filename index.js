@@ -9,8 +9,12 @@ const setCookies = (allCookies, cookies = {}) => {
       return c.split("=");
     });
     props = data.map(prop => {
-      let obj = {};
+      const obj = {
+        httponly: true,
+        secure: true
+      };
       obj[`${prop[0]}`.trim().toLowerCase()] = prop[1];
+      
       return obj;
     });
     return props.reduce((acc, curr) => {
