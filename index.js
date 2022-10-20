@@ -1,4 +1,4 @@
-// setCookies(["token-local=foo;expires=20210101021234;domain=snap.app","token-dev=bar;expires=20210101021234;domain=snap.app"], {'token-local': 'baz'})
+// setCookies(["token-local=foo;expires=20210101021234;domain=snap.app","token-dev=bar;expires=20210101021234;domain=snap.app"], {'token-local': 'baz', 'another-addition': 'added!'})
 //
 const setCookies = (allCookies, cookies = {}) => {
   try {
