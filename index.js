@@ -1,31 +1,9 @@
 // setCookies(["token-local=foo;expires=20210101021234;domain=snap.app","token-dev=bar;expires=20210101021234;domain=snap.app"], {'token-local': 'baz', 'another-addition': 'added!'})
 //
-const setCookies = (allCookies, cookies = {}) => {
-  try {
-    if (allCookies && cookies) {
-      allCookies.forEach((cookie) => {
-        data = cookie.split(';').map((c) => {
-          return c.split("=")
-        }).reduce((result, element) => {
-          result[element[0].trim().toLowerCase()] = element[element.length - 1]
-          return result
-        }, {})
-        const cookieSuffix = ['token-local', 'token-dev', 'token-staging', 'token']
-        cookieSuffix.forEach((name) => {
-          if (data[name]) {
-            cookies[`${name}`] = {
-              value: data[name],
-              expires: data["expires"],
-              domain: data["domain"],
-              httponly: true,
-              secure: true
-            }
-          }
-        })
-      })
-      return cookies
-    }
-  } catch(err) {
-    console.error(err);
-  }
+const setCookies =  (allCookies, cookies = {}) => {
+  return {...cookies, ...['token-local', 'token-dev', 'token-staging', 'token'].reduce((acc, cookieName) => {
+      const data = allCookies.map(cookie => (Object.fromEntries(cookie.split(';').map(c => c.split('=')).map(([name, value]) => ([name.trim().toLowerCase(), value]))))).find(c => !!c[cookieName]);
+      const update = data ? {[cookieName]: {value: data[cookieName],expires: data["expires"],domain: data["domain"],httponly: true,secure: true}} : {};
+      return {...acc, ...update};
+    }, {})};
 }
