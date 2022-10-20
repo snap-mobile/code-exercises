@@ -1,31 +1,26 @@
 // setCookies(["token-local=foo;expires=20210101021234;domain=snap.app","token-dev=bar;expires=20210101021234;domain=snap.app"], {'token-local': 'baz'})
 //
 const setCookies = (allCookies, cookies = {}) => {
-  try {
-    if (allCookies && cookies) {
-      allCookies.forEach((cookie) => {
-        data = cookie.split(';').map((c) => {
-          return c.split("=")
-        }).reduce((result, element) => {
-          result[element[0].trim().toLowerCase()] = element[element.length - 1]
-          return result
-        }, {})
-        const cookieSuffix = ['token-local', 'token-dev', 'token-staging', 'token']
-        cookieSuffix.forEach((name) => {
-          if (data[name]) {
-            cookies[`${name}`] = {
-              value: data[name],
-              expires: data["expires"],
-              domain: data["domain"],
-              httponly: true,
-              secure: true
-            }
+  if (allCookies && cookies) {
+    return allCookies.reduce((merged, cookie) => {
+      const data = cookie.split(';').map((c) => c.split("=")).reduce((r, e) => ({
+        ...r,
+        [e[0].trim().toLowerCase()]: e.at(-1),
+      }), {})
+      const name = Object.keys(data)[0];
+      const cs = ['token-local', 'token-dev', 'token-staging', 'token']
+      return cs.indexOf(name) !== -1 ?
+        {
+          ...merged,
+          [name]: {
+            value: data[name],
+            expires: data.expires,
+            domain: data.domain,
+            httponly: true,
+            secure: true
           }
-        })
-      })
-      return cookies
-    }
-  } catch(err) {
-    console.error(err);
+        }
+        : merged
+    }, cookies)
   }
 }
