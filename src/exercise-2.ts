@@ -8,8 +8,10 @@ const makeQuery = (
       [key: string]: string;
     };
     body?: string;
-  },
-) => { return "hello" };
+  }
+) => {
+  return "hello";
+};
 
 /**
  * This time we want to extract parameters from this makeQuery function.
@@ -21,7 +23,7 @@ const makeQuery = (
  * https://www.typescriptlang.org/docs/handbook/utility-types.html
  * https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
  */
-type MakeQueryParameters = unknown;
+type MakeQueryParameters = Parameters<typeof makeQuery>;
 
 type tests = [
   Expect<
@@ -35,8 +37,8 @@ type tests = [
             [key: string]: string;
           };
           body?: string;
-        },
+        }
       ]
     >
-  >,
+  >
 ];
