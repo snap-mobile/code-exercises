@@ -9,7 +9,7 @@ type Filling = "cheese" | "ham" | "salami";
 //
 // https://www.sitepen.com/blog/taming-strings-with-template-literal-types
 //
-type Sandwich = unknown;
+type Sandwich = `${BreadType} sandwich with ${Filling}`;
 
 type tests = [
   Expect<

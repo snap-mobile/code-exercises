@@ -1,4 +1,3 @@
-
 // We have a route function that should accept fully
 // qualified routes that start with a / as the base.
 //
@@ -10,8 +9,11 @@
 // functionality. Reference below:
 //
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+
+import { Expect, NotEqual } from "./type-assertions";
+
 //
-type Route = unknown;
+type Route = `/${string}`;
 
 export const goToRoute = (route: Route) => {};
 
@@ -23,3 +25,8 @@ goToRoute("/admin/users");
 // FAIL
 goToRoute("users/1");
 goToRoute("http://facebook.com");
+
+type tests = [
+  Expect<NotEqual<"/users", Route>>,
+  Expect<NotEqual<"/users", Route>>
+];
