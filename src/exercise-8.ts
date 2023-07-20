@@ -16,10 +16,12 @@ export const programModeEnumMap = {
   PLANNED: {
     ONE_ON_ONE: "planned1on1",
     SELF_DIRECTED: "plannedSelfDirected",
-  }
-};
+  },
+} as const;
 
-export type GroupProgram = unknown;
+export type GroupProgram =
+  | typeof programModeEnumMap["GROUP"]
+  | typeof programModeEnumMap["ANNOUNCEMENT"];
 
 type tests = [
   Expect<
