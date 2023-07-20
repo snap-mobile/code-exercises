@@ -8,6 +8,7 @@ import { Equal, Expect } from "type-assertions";
 //
 // More Reading: https://www.typescript-training.com/course/intermediate-v1/08-indexed-access-types
 //
+
 export const programModeEnumMap = {
   GROUP: "group",
   ANNOUNCEMENT: "announcement",
@@ -16,16 +17,11 @@ export const programModeEnumMap = {
   PLANNED: {
     ONE_ON_ONE: "planned1on1",
     SELF_DIRECTED: "plannedSelfDirected",
-  }
-};
+  },
+} as const;
 
-export type GroupProgram = unknown;
+export type GroupProgram =
+  | typeof programModeEnumMap.GROUP
+  | typeof programModeEnumMap.ANNOUNCEMENT;
 
-type tests = [
-  Expect<
-    Equal<
-      GroupProgram,
-      "group" | "announcement"
-    >
-  >,
-];
+type tests = [Expect<Equal<GroupProgram, "group" | "announcement">>];
