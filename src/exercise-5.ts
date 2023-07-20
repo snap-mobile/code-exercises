@@ -11,6 +11,7 @@ type Routes = "/users" | "/users/:id" | "/posts" | "/posts/:id";
 // https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 //
-type DynamicRoutes = unknown;
+
+type DynamicRoutes = Extract<Routes, `${string}:${string}`>;
 
 type tests = [Expect<Equal<DynamicRoutes, "/users/:id" | "/posts/:id">>];

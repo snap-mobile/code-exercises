@@ -10,6 +10,7 @@ const myFunc = () => {
  * https://www.typescriptlang.org/docs/handbook/utility-types.html
  * https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
  */
-type MyFuncReturn = unknown;
+
+type MyFuncReturn = ReturnType<typeof myFunc>;
 
 type tests = [Expect<Equal<MyFuncReturn, string>>];

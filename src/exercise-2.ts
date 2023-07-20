@@ -21,7 +21,7 @@ const makeQuery = (
  * https://www.typescriptlang.org/docs/handbook/utility-types.html
  * https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
  */
-type MakeQueryParameters = unknown;
+type MakeQueryParameters = Parameters<typeof makeQuery>;
 
 type tests = [
   Expect<

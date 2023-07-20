@@ -11,7 +11,7 @@
 //
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 //
-type Route = unknown;
+type Route = `/${string}`;
 
 export const goToRoute = (route: Route) => {};
 
