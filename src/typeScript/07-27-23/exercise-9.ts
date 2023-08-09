@@ -8,10 +8,10 @@ import { Equal, Expect } from "type-assertions";
 // More Info: Based on the solution above and what you know about Array lookups
 // in general. How would you 'guess' this could be done?
 //
-const fruits = ["apple", "banana", "orange"];
+const fruits = ["apple", "banana", "orange"] as const;
 
-type AppleOrBanana = unknown;
-type Fruit = unknown;
+type AppleOrBanana =  typeof fruits[0 | 1]
+type Fruit = typeof fruits[number];
 
 type secondTest = [
   Expect<Equal<AppleOrBanana, "apple" | "banana">>,

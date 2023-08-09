@@ -16,7 +16,7 @@ export const programModeEnumMap = {
     ONE_ON_ONE: "planned1on1",
     SELF_DIRECTED: "plannedSelfDirected",
   }
-};
+} as const;
 
 export type GroupProgram = typeof programModeEnumMap["GROUP"];
 export type AnnouncementProgram = typeof programModeEnumMap["ANNOUNCEMENT"];
