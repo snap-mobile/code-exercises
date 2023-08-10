@@ -17,7 +17,7 @@ class BattleStation {
   }
 }
 
-const defiant = new Starship('Humanity')
+const humanity = new Starship('Humanity')
 // add CrewMembers to the starships
 // report current crewmembers
 // clone the current crew
